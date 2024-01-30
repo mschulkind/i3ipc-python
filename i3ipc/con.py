@@ -1,9 +1,10 @@
 import re
 import sys
-from .model import Rect, Gaps
-from . import replies
 from collections import deque
-from typing import List, Optional
+from typing import Any, List, Optional, Self
+
+from . import replies
+from .model import Gaps, Rect
 
 
 class Con:
@@ -85,6 +86,43 @@ class Con:
     :ivar ipc_data: The raw data from the i3 ipc.
     :vartype ipc_data: dict
     """
+
+    border: str
+    current_border_width: int
+    floating: str
+    focus: list[int]
+    focused: bool
+    fullscreen_mode: int
+    id: int
+    layout: str
+    marks: list[str]
+    name: str
+    num: int
+    orientation: str
+    percent: float
+    scratchpad_state: str
+    shell: str
+    sticky: bool
+    type: str
+    urgent: bool
+    window: int
+    nodes: list[Self]
+    floating_nodes: list[Self]
+    window_class: str
+    window_instance: str
+    window_role: str
+    window_title: str
+    rect: Rect
+    window_rect: Rect
+    deco_rect: Rect
+    geometry: Rect
+    app_id: str
+    pid: int
+    gaps: Gaps
+    representation: str
+    visible: bool
+    ipc_data: dict[str, Any]
+
     def __init__(self, data, parent, conn):
         self.ipc_data = data
         self._conn = conn
