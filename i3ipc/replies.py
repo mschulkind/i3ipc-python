@@ -1,10 +1,10 @@
-from typing import List, cast, get_args, get_origin, get_type_hints
+from typing import Any, List, cast, get_args, get_origin, get_type_hints
 
 from .model import OutputMode, Rect
 
 
 class _BaseReply:
-    def __init__(self, data):
+    def __init__(self, data: dict[str, Any]):
         self.ipc_data = data
         for member_name, member_type in get_type_hints(self.__class__).items():
             value = data.get(member_name, None)

@@ -1,6 +1,8 @@
+from enum import Enum
+from typing import Any, Optional
+
 from . import con
 from .replies import BarConfigReply, InputReply
-from enum import Enum
 
 
 class IpcBaseEvent:
@@ -65,6 +67,11 @@ class WorkspaceEvent(IpcBaseEvent):
     :ivar ipc_data: The raw data from the i3 ipc.
     :vartype ipc_data: dict
     """
+    change: str
+    current: Optional[con.Con]
+    old: Optional[con.Con]
+    ipc_data: dict[str, Any]
+
     def __init__(self, data, conn, _Con=con.Con):
         self.ipc_data = data
         self.change = data['change']
@@ -126,6 +133,10 @@ class WindowEvent(IpcBaseEvent):
     :ivar ipc_data: The raw data from the i3 ipc.
     :vartype ipc_data: dict
     """
+    change: str
+    container: con.Con
+    ipc_data: dict[str, Any]
+
     def __init__(self, data, conn, _Con=con.Con):
         self.ipc_data = data
         self.change = data['change']

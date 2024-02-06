@@ -123,6 +123,8 @@ class Con:
     visible: bool
     ipc_data: dict[str, Any]
 
+    parent: Optional['Con']
+
     def __init__(self, data, parent, conn):
         self.ipc_data = data
         self._conn = conn
